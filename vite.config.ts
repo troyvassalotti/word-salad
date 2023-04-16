@@ -19,6 +19,9 @@ export default defineConfig(({ mode }) => {
 						entry: 'src/index.ts',
 						formats: ['es'],
 					},
+					rollupOptions: {
+						external: ['lit'],
+					},
 			  };
 
 	return {
@@ -33,8 +36,5 @@ export default defineConfig(({ mode }) => {
 				],
 			}),
 		],
-		rollupOptions: {
-			external: [/^lit/],
-		},
 	};
 });
