@@ -23,15 +23,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/troyvassalotti/vite-lit-starter.git"
+    "url": "git+https://github.com/troyvassalotti/word-salad.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/troyvassalotti/vite-lit-starter/issues"
+    "url": "https://github.com/troyvassalotti/word-salad/issues"
   },
-  "homepage": "https://github.com/troyvassalotti/vite-lit-starter#readme",
+  "homepage": "https://github.com/troyvassalotti/word-salad#readme",
   "devDependencies": {
     "api-viewer-element": "^1.0.0-pre.7",
     "cem-plugin-jet-brains-ide-integration": "^1.0.0-beta.1",
