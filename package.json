@@ -1,5 +1,5 @@
 {
-  "name": "word-salad",
+  "name": "@troyv/word-salad",
   "version": "1.0.0",
   "description": "A web component for generating word salad.",
   "type": "module",
