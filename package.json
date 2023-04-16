@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "A web component for generating word salad.",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/word-salad.js",
   "files": [
     "dist",
     "types"
   ],
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/word-salad.js"
   },
   "types": "types/index.d.ts",
   "scripts": {
