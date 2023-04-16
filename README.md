@@ -1,2 +1,3 @@
-# vite-lit-starter
-Bootstrap a lit web component using vite.
+# `word-salad`
+
+A web component for creating word salad.
