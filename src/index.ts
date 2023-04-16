@@ -7,6 +7,11 @@ import { customElement, property, state } from 'lit/decorators.js';
  */
 @customElement('word-salad')
 export default class WordSalad extends LitElement {
+	// Don't create a shadow root
+	protected createRenderRoot(): Element | ShadowRoot {
+		return this;
+	}
+
 	/** Full list of words to be used. */
 	@property()
 	bank = '';
@@ -148,7 +153,7 @@ export default class WordSalad extends LitElement {
 	}
 
 	render(): TemplateResult {
-		return html`<form @submit=${this.handleFormSubmit} part="form">
+		return html`<form @submit=${this.handleFormSubmit}>
 				<div class="field">
 					<label for="requestType">What flavor do you want?</label>
 					<select
@@ -171,9 +176,9 @@ export default class WordSalad extends LitElement {
 						.value=${this.number}
 					/>
 				</div>
-				<button type="submit" part="submit">Submit</button>
+				<button type="submit">Submit</button>
 			</form>
-			<div part="output">${this.output}</div>`;
+			<p>${this.output}</p>`;
 	}
 }
 
