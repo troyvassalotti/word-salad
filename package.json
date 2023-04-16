@@ -1,6 +1,6 @@
 {
   "name": "@troyv/word-salad",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A web component for generating word salad.",
   "type": "module",
   "main": "dist/word-salad.js",
