@@ -1,17 +1,47 @@
-import { LitElement, html, TemplateResult } from 'lit';
+import { LitElement, html, css, TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 /**
  * @tag word-salad
  * @summary Generates word salad from a custom word bank.
+ *
+ * @slot selection-label - Text for the selection's label.
+ * @slot number-label - Text for the number's label.
+ * @slot submit-label - Text for the submit button.
+ * @slot idle-text - Text for the area shown when no input was given.
+ *
+ * @csspart form - Form element.
+ * @csspart selection-field - Wrapper for the selection label and input.
+ * @csspart selection-label - Label element for the selection.
+ * @csspart selection-input - Input element for the selection input.
+ * @csspart number-field - Wrapper for the number label and input.
+ * @csspart number-label - Label element for the number.
+ * @csspart number-input - Input element for the number input.
+ * @csspart submit - Submit button.
+ * @csspart output - Output element for the resulting salad.
  */
 @customElement('word-salad')
 export default class WordSalad extends LitElement {
-	// Don't create a shadow root
-	protected createRenderRoot(): Element | ShadowRoot {
-		return this;
-	}
+	static get styles() {
+		return css`
+			:host {
+				box-sizing: border-box;
+				display: block;
+			}
 
+			*,
+			*::after,
+			*::before {
+				box-sizing: inherit;
+			}
+
+			input,
+			select,
+			button {
+				font: inherit;
+			}
+		`;
+	}
 	/** Full list of words to be used. */
 	@property()
 	bank = '';
@@ -28,6 +58,10 @@ export default class WordSalad extends LitElement {
 	@property({ type: Number })
 	maxWordsPerSentence: number = 20;
 
+	/** Maximum number of sentences or words that can be generated. */
+	@property({ type: Number })
+	maxNumber: number = 250;
+
 	/** Total number of type to generate. */
 	@state()
 	number: number = 10;
@@ -38,7 +72,7 @@ export default class WordSalad extends LitElement {
 
 	/** The final output based on number and type. */
 	@state()
-	output: TemplateResult = html`Awaiting word salad...`;
+	output: TemplateResult | undefined;
 
 	/** Filtered word bank. */
 	private get wordBank(): string[] {
@@ -90,9 +124,9 @@ export default class WordSalad extends LitElement {
 	 * @returns HTML for output based on type.
 	 */
 	private generateOutput(): TemplateResult {
-		if (this.number > 250) {
-			return (this.output = html`Hey now, don't try to generate more than 250 of
-			whatever you want, okay?`);
+		if (this.number > this.maxNumber) {
+			return (this.output = html`Hey now, don't try to generate more than
+			${this.maxNumber} of whatever you want, okay?`);
 		}
 
 		switch (this.type) {
@@ -153,10 +187,14 @@ export default class WordSalad extends LitElement {
 	}
 
 	render(): TemplateResult {
-		return html`<form @submit=${this.handleFormSubmit}>
-				<div class="field">
-					<label for="requestType">What flavor do you want?</label>
+		return html`
+			<form @submit=${this.handleFormSubmit} part="form">
+				<div class="field" part="selection-field">
+					<label for="requestType" part="selection-label">
+						<slot name="selection-label">What flavor do you want?</slot>
+					</label>
 					<select
+						part="selection-input"
 						name="requestType"
 						id="requestType"
 						@input=${this.handleOptionSelection}
@@ -165,20 +203,28 @@ export default class WordSalad extends LitElement {
 						<option value="sentences">Sentences</option>
 					</select>
 				</div>
-				<div class="field">
-					<label for="requestCount">How many orders?</label>
+				<div class="field" part="number-field">
+					<label for="requestCount" part="number-label">
+						<slot name="number-label">How many orders?</slot>
+					</label>
 					<input
+						part="number-input"
 						id="requestCount"
 						name="requestCount"
 						type="number"
-						autofocus
 						@input=${this.handleRequestCount}
 						.value=${this.number}
 					/>
 				</div>
-				<button type="submit">Submit</button>
+				<button type="submit" part="submit">
+					<slot name="submit">Submit</slot>
+				</button>
 			</form>
-			<p>${this.output}</p>`;
+			<output part="output">${this.output}</output>
+			<div style="display: ${this.output ? 'none' : 'block'};">
+				<slot name="idle-text">Awaiting word salad...</slot>
+			</div>
+		`;
 	}
 }
 

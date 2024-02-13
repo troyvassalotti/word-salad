@@ -15,38 +15,23 @@
   "scripts": {
     "start": "vite",
     "vite::build": "tsc && vite build",
-    "vite::docs": "vite build --mode docs",
-    "preview": "vite --mode docs",
-    "build": "npm-run-all prettier::format vite::build",
-    "prettier::lint": "npx prettier --check .",
+    "build": "npm run vite::build",
     "prettier::format": "npx prettier --write ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/troyvassalotti/word-salad.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/troyvassalotti/word-salad/issues"
   },
   "homepage": "https://github.com/troyvassalotti/word-salad#readme",
   "devDependencies": {
-    "api-viewer-element": "^1.0.0-pre.7",
-    "cem-plugin-jet-brains-ide-integration": "^1.0.0-beta.1",
-    "cem-plugin-jsdoc-example": "^0.0.9",
-    "cem-plugin-vs-code-custom-data-generator": "^1.4.1",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.3",
-    "remark": "^14.0.2",
-    "typescript": "^5.0.4",
-    "vite": "^4.1.1",
-    "vite-plugin-cem": "^0.4.0"
+    "typescript": "^5.3.3",
+    "vite": "^5.1.1"
   },
   "dependencies": {
     "lit": "^2.6.1"
-  },
-  "customElements": "dist/custom-elements.json",
-  "web-types": "dist/web-types.json"
+  }
 }
