@@ -15,7 +15,8 @@
   "scripts": {
     "start": "vite",
     "vite::build": "tsc && vite build",
-    "build": "npm run vite::build",
+    "vite::docs": "vite build --mode docs",
+    "build": "npm run vite::docs && npm run vite::build",
     "prettier::format": "npx prettier --write ."
   },
   "repository": {
