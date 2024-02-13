@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 export default defineConfig(({ mode }) => {
 	if (mode === 'docs') {
 		return {
+			base: '/word-salad/',
 			build: {
 				outDir: 'docs',
 			},
